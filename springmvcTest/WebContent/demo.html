@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文件上传</title>
+<!-- 上传图片 -->
+		<script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./uploadify/Huploadify.css"/>
+	<script type="text/javascript" src="./uploadify/jquery.Huploadify.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+$(function(){
+	$('#upload').Huploadify({
+		auto:false,
+		fileTypeExts:'*.gif; *.jpg; *.jpeg; *.png',
+		multi:true,
+		formData:{key:123456,key2:'vvvv'},
+		fileSizeLimit:9999,
+		showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+		showUploadedSize:true,
+		buttonText:'选择文件',
+		removeTimeout:9999999,
+		uploader:'a/upload',
+		onUploadStart:function(){
+			alert('开始上传');
+			},
+			onUploadError:function(){
+			alert('上传失败');
+			},
+		onInit:function(){
+			//alert('初始化');
+			},
+		onUploadComplete:function(file, data){
+			//alert('上传完成');
+			var cToObj = eval("(" + data + ")");
+			$("#img").val(cToObj.imgPath);
+			$("#file_upload").addClass("hide");
+			$("#showimg").removeClass("hide");
+			$("#showimg").attr("src", "${base}/" + cToObj.imgPath);
+			$("#file_upload_1-button").addClass("hide");
+			},
+		onCancel:function(file){
+			$("#file_upload_1-button").removeClass("hide");
+			$("#img").val('');
+			console.log('删除的文件：'+file);
+			console.log(file);
+		}
+		});
+})
+</script>
+</head>
+
+<body>
+	<div id="upload" style="line-height: 30px; width: 100px;margin-bottom: 20px;"></div>
+	 <input id="file_upload" class="hide" name="file_upload" type="file" multiple="true"> <!-- 此处的name属性值应该与实体的对象属性一致 -->
+	  <span>
+
+	  </span> 
+</body>
+</html>

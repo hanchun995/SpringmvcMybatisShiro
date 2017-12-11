@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script charset="utf-8" src="editor/kindeditor.js"></script>
+<script charset="utf-8" src="editor/lang/zh_CN.js"></script>
+<script>
+	KindEditor.ready(function(K) {
+
+		 var editor = K.create('textarea[name="content"]', {
+		     uploadJson : '${ctx}/static/common/kindeditor-4.1/jsp/upload_json.jsp', //指定上传图片的服务器端程序
+		     allowUpload : true,
+		     urlType : 'absolute',
+		                 resizeType : 0,  //文本框不可拖动
+		     items : [  //配置工具栏
+		       'image'],
+		        
+		        afterCreate : function(){ //kindeditor创建后，将编辑器的内容设置到原来的textarea控件里
+		               this.sync();   
+		        },
+		        afterChange: function(){ //编辑器内容发生变化后，将编辑器的内容设置到原来的textarea控件里
+		               this.sync();   
+		        },
+		        afterBlur : function(){ //编辑器聚焦后，将编辑器的内容设置到原来的textarea控件里
+		            this.sync(); 
+		        }  
+		 });
+	});
+</script>
+</head>
+<body>
+	<span class="webname"> <textarea rows="20" cols="120" name="content" id="content" style="resize: none; overflow-y: auto">啊啊啊</textarea></span>
+</body>
+</html>
