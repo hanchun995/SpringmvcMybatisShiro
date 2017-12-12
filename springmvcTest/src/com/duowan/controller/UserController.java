@@ -53,7 +53,7 @@ public class UserController {
 	}
 	
 
-	@RequestMapping("success")
+/*	@RequestMapping("success")
 	public String success(Model model,HttpServletRequest req,HttpServletResponse resp,String username,String password){
 		User user=new User();
 		user.setUsername(username);
@@ -61,7 +61,7 @@ public class UserController {
 		req.setAttribute("user", user);
 		return "login";
 		
-	}
+	}*/
 	
 /*	@RequestMapping("up")
 	public String index(Model model,HttpServletRequest req,HttpServletResponse resp){

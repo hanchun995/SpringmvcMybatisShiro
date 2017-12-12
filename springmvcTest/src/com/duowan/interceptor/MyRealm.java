@@ -13,7 +13,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;  
 import org.apache.shiro.session.Session;  
 import org.apache.shiro.subject.PrincipalCollection;  
-import org.apache.shiro.subject.Subject;  
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;  
   
 /** 
  * 自定义的指定Shiro验证用户登录的类 
@@ -112,8 +113,10 @@ public class MyRealm extends AuthorizingRealm {
             return authcInfo;  
         }else if("admin".equals(token.getUsername())){  
         	String username =token.getUsername();
-        	String password = new String((char[]) token.getCredentials());
-            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("admin", "123", this.getName());  
+        	//模拟数据库中得到md5加密之后的密码
+        	String password = "78f50b64a132f209ea77fdeebe501de6";
+        	String salt="qwerty";
+            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("admin", password,ByteSource.Util.bytes(salt), this.getName());  
             this.setSession("username", username);  
             this.setSession("password", password);  
             return authcInfo;  
